@@ -36,7 +36,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class ProductResourceTests {
 	
 	@Autowired
-	private MockMvc mocMvc;
+	private MockMvc mockMvc;
 	
 	@MockBean
 	private ProductService service;
@@ -80,7 +80,7 @@ public class ProductResourceTests {
 	public void deleteShouldReturnNoContentWhenIdExisits() throws Exception {
 		
 		ResultActions result = 
-				mocMvc.perform(delete("/products/{id}", existingId)
+				mockMvc.perform(delete("/products/{id}", existingId)
 					.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNoContent());
@@ -90,7 +90,7 @@ public class ProductResourceTests {
 	public void deleteShouldReturnNotFoundWhenIdDoesNotExisit() throws Exception {
 		
 		ResultActions result = 
-				mocMvc.perform(delete("/products/{id}", nonExistingId)
+				mockMvc.perform(delete("/products/{id}", nonExistingId)
 					.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());
@@ -102,7 +102,7 @@ public class ProductResourceTests {
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
 		ResultActions result = 
-				mocMvc.perform(post("/products")
+				mockMvc.perform(post("/products")
 					.content(jsonBody)
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON));
@@ -119,7 +119,7 @@ public class ProductResourceTests {
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
 		ResultActions result = 
-				mocMvc.perform(put("/products/{id}", existingId)
+				mockMvc.perform(put("/products/{id}", existingId)
 					.content(jsonBody)
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON));
@@ -136,7 +136,7 @@ public class ProductResourceTests {
 		String jsonBody = objectMapper.writeValueAsString(productDTO);
 		
 		ResultActions result = 
-				mocMvc.perform(put("/products/{id}", nonExistingId)
+				mockMvc.perform(put("/products/{id}", nonExistingId)
 					.content(jsonBody)
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON));
@@ -149,7 +149,7 @@ public class ProductResourceTests {
 	public void findAllShouldReturnPage() throws Exception {
 		
 		ResultActions result = 
-				mocMvc.perform(get("/products")
+				mockMvc.perform(get("/products")
 					.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isOk());
@@ -159,7 +159,7 @@ public class ProductResourceTests {
 	public void findByIdShouldReturnProductWhenIdExists() throws Exception {
 		
 		ResultActions result = 
-				mocMvc.perform(get("/products/{id}", existingId)
+				mockMvc.perform(get("/products/{id}", existingId)
 					.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isOk());
@@ -172,7 +172,7 @@ public class ProductResourceTests {
 	public void findByIdShouldReturnNotFoundWhenIdDosNotExist() throws Exception {
 		
 		ResultActions result = 
-				mocMvc.perform(get("/products/{id}", nonExistingId)
+				mockMvc.perform(get("/products/{id}", nonExistingId)
 					.accept(MediaType.APPLICATION_JSON));
 		
 		result.andExpect(status().isNotFound());
